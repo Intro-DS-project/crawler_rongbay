@@ -4,19 +4,31 @@ from datetime import datetime
 def address_conversion(address_str):
     # Địa chỉ: Nguyễn Chí Thanh, Láng Thượng, Q.Đống Đa, Hà Nội
     # Địa chỉ format khác
-    address_str = address_str.split(",")
-    try:
-        street = ','.join(address_str[:-3]).strip()
-    except IndexError:
-        street = ""
-    try:
-        ward = address_str[-3].strip()
-    except IndexError:
-        ward = ""
-    try:
-        district = address_str[-2].strip().replace("Q.", "Quận ")
-    except IndexError:
-        district = ""
+    address_part = address_str.split(",")
+    if len(address_part) == 1:
+        address_part = address_str.split("-")
+
+    length = len(address_part)
+    if length == 1:
+        street, ward, district = "", "", ""
+    elif length == 2:
+        street, ward, district = "", "", address_part[-2]
+    elif length == 3:
+        street, ward, district = address_part[-3], "", address_part[-2]
+    else:
+        street, ward, district = address_part[-4], address_part[-3], address_part[-2]
+
+    def clean(str, pat):
+        res = str
+        for p in pat:
+            if p in str:
+                res = str.split(p)[-1]
+                break
+        return res.lstrip('0123456789/ ')
+
+    street = clean(street.replace("Q.", "Quận "), ["Phố", "Đường", "phố", "đường", "Ngõ", "ngõ", "Ngách", "ngách"])
+    ward = clean(ward, ["Phường", "Xã", "phường", "xã",])
+    district = clean(district, ["Quận", "Huyện", "quận", "huyện"])
 
     return street, ward, district
 
