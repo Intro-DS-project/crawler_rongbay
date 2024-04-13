@@ -21,5 +21,3 @@ class RoomItem(scrapy.Item):
     direction = scrapy.Field()
     street_width = scrapy.Field()
     post_date = scrapy.Field()
-    description = scrapy.Field()
-    url = scrapy.Field()
