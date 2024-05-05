@@ -1,0 +1,6 @@
+Scrapy
+requests
+python-dotenv
+google-generativeai
+hanoikovoiduocdau
+supabase
