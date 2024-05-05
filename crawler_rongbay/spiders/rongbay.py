@@ -5,11 +5,13 @@ from hanoikovoidcdau import standardize
 
 from crawler_rongbay.items import RoomItem
 from crawler_rongbay.gemini import extract_description, extract_location
+from crawler_rongbay.remote_db import init
 
 
 class RongbaySpider(scrapy.Spider):
     name = "rongbay"
     stop = False
+    supabase = init()
 
     def start_requests(self):
         i = 1
@@ -67,4 +69,5 @@ class RongbaySpider(scrapy.Spider):
         (item["num_bedroom"], item["num_diningroom"], item["num_kitchen"], item["num_toilet"], item["num_floor"],
          item["current_floor"], item["direction"], item["street_width"], *_) = fields_int
 
+        self.supabase.table("entries").insert(item.to_dict()).execute()
         yield item

@@ -20,9 +20,8 @@ def extract_description(description):
         current_floor (phòng trọ ở tầng mấy), direction (hướng nhà, 1 trong 4 giá trị Đông/Tây/Nam/Bắc), \
         street_width (số thực, theo mét). \
         Trường nào không xuất hiện thì để là 0.\
-        Trường direction không xuất hiện thì để là rỗng.\
         Các trường thông tin ngăn cách bởi dấu phẩy.\
-        Ví dụ: \"0,0,1,1,0,0,Đông,0\", hoặc \"1,0,1,1,0,0,,0\" nếu không có direction."
+        Ví dụ: \"0,0,1,1,0,0,Đông,0\", hoặc \"1,0,1,1,0,0,0,0\" nếu không có direction."
 
     response = model.generate_content(prompt)
     return response.text
