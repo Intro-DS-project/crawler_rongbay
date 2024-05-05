@@ -13,3 +13,9 @@ in root directory of project
 ```bash
 scrapy crawl rongbay -o output.json
 ```
+
+or use Docker
+```bash
+docker build -t rongbay .
+docker run --name rongbay_c1 rongbay
+```
